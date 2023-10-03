@@ -25,7 +25,7 @@ def home():
   session.clear()
   
   if request.method == 'POST':
-    # Session Timeout in 5 minutes
+    # Session Timeout in 20 seconds
     session.permanent = True
     app.permanent_session_lifetime = timedelta(seconds=20)
      
