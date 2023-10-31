@@ -96,4 +96,4 @@ def disconnect():
   print("{name} has left the room".format(name=name))
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True,allow_unsafe_werkzeug=True, port=5000, host='0.0.0.0')

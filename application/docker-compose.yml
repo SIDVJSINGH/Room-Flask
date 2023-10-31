@@ -1,0 +1,14 @@
+# services:
+#   profiles:
+#     build: .
+#     command: python -u backend.py
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - .:/applicaton
+#     links:
+#       - db
+#   db:
+#     image: mongodb:latest
+#     ports:
+#       - "27017:27017"
