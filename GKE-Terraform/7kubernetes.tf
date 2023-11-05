@@ -47,5 +47,4 @@ resource "google_container_cluster" "primary" {
     machine_type = "e2-medium"
     disk_size_gb = 50      
   }
-  deletion_protection = false
 }
