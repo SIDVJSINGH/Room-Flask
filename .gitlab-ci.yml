@@ -3,26 +3,34 @@ include:
 
 stages:
   - validate
-  - build
+  - plan
   - deploy
   - destroy
 
-before_script:
-  - cd GKE-Terraform
-
-validate:
+terraform_validate:
+  stage: validate
+  before_script:
+    - cd GKE-Terraform
   extends: .terraform:validate
 
-build:
-  extends: .terraform:build
+terraform_plan:
+  stage: plan
+  before_script:
+    - cd GKE-Terraform
+  script:
+    - gitlab-terraform plan -out=plan.out
 
-terraform_deploy:
+terraform_apply:
   stage: deploy
+  before_script:
+    - cd GKE-Terraform
   script:
     - gitlab-terraform apply -auto-approve
 
 terraform_destroy:
   stage: destroy
+  before_script:
+    - cd GKE-Terraform
   script:
     - gitlab-terraform destroy -auto-approve
   when: manual
