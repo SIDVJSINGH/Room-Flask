@@ -8,25 +8,12 @@ stages:
   - destroy
 
 terraform_validate:
+  image:
+    name: hashicorp/terraform:light
+    # entrypoint: ["/usr/bin/env"]
   stage: validate
-  work-directory: .\GKE-Terraform\
-  extends: .terraform:validate
 
-terraform_plan:
-  stage: plan
-  work-directory: .\GKE-Terraform\
   script:
-    - gitlab-terraform plan -out=plan.out
-
-terraform_apply:
-  stage: deploy
-  work-directory: .\GKE-Terraform\
-  script:
-    - gitlab-terraform apply -auto-approve
-
-terraform_destroy:
-  stage: destroy
-  work-directory: .\GKE-Terraform\
-  script:
-    - gitlab-terraform destroy -auto-approve
-  when: manual
+    - cd ./GKE-Terraform/
+    - terraform init
+    - terraform validate

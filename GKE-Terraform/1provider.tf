@@ -5,7 +5,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket         = "stp-application"
+    bucket         = "stp-7thsem"
     prefix         = "GKE/gke.tfstate"
   }
 }
@@ -15,7 +15,7 @@ terraform {
 
 provider "google" {
   credentials = file("${path.module}/key/all.json")
-  project     = "stp-application"
+  project     = "stp-7thsem"
   region      = "us-central1"
   zone        = "us-central1-a"
 }

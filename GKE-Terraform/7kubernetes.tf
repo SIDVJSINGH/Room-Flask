@@ -25,7 +25,7 @@ resource "google_container_cluster" "primary" {
   }
   
   workload_identity_config {
-    workload_pool = "stp-application.svc.id.goog"
+    workload_pool = "stp-7thsem.svc.id.goog"
   }
   
   ip_allocation_policy {
@@ -44,4 +44,5 @@ resource "google_container_cluster" "primary" {
       cidr_block   = "203.0.113.4/32"
     }
   }
+  deletion_protection = false
 }
