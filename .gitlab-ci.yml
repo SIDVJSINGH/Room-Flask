@@ -9,28 +9,24 @@ stages:
 
 terraform_validate:
   stage: validate
-  before_script:
-    - cd GKE-Terraform
+  work-directory: .\GKE-Terraform\
   extends: .terraform:validate
 
 terraform_plan:
   stage: plan
-  before_script:
-    - cd GKE-Terraform
+  work-directory: .\GKE-Terraform\
   script:
     - gitlab-terraform plan -out=plan.out
 
 terraform_apply:
   stage: deploy
-  before_script:
-    - cd GKE-Terraform
+  work-directory: .\GKE-Terraform\
   script:
     - gitlab-terraform apply -auto-approve
 
 terraform_destroy:
   stage: destroy
-  before_script:
-    - cd GKE-Terraform
+  work-directory: .\GKE-Terraform\
   script:
     - gitlab-terraform destroy -auto-approve
   when: manual
