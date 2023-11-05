@@ -1,10 +1,19 @@
 resource "google_project_service" "compute" {
+  project = "stp-7thsem" 
   service = "compute.googleapis.com"
   disable_on_destroy = true
   disable_dependent_services = true
 }
 
+resource "google_project_service" "cloudresourcemanager" { 
+  project = "stp-7thsem" 
+  service = "cloudresourcemanager.googleapis.com"
+  disable_on_destroy = true
+  disable_dependent_services = true
+}
+
 resource "google_project_service" "container" {
+  project = "stp-7thsem" 
   service = "container.googleapis.com"
   disable_on_destroy = true
   disable_dependent_services = true

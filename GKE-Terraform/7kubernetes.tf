@@ -1,6 +1,6 @@
 resource "google_container_cluster" "primary" {
   name                     = "primary"
-  location                 = "us-central1-a"
+  location                 = "us-central1"
   initial_node_count       = 1
   network                  = google_compute_network.vpc_network.self_link
   subnetwork               = google_compute_subnetwork.private-subnet.self_link
@@ -33,16 +33,19 @@ resource "google_container_cluster" "primary" {
   }
   
   private_cluster_config {
-    enable_private_nodes    = true
-    enable_private_endpoint = true
-    master_ipv4_cidr_block  = "172.16.0.0/28"
+    enable_private_nodes    = false
+    enable_private_endpoint = false
   }
 
   master_authorized_networks_config {
     cidr_blocks {
-      display_name = "my-ip"
-      cidr_block   = "203.0.113.4/32"
+      display_name = "all-ip"
+      cidr_block   = "0.0.0.0/0"
     }
+  }
+    node_config {
+    machine_type = "e2-medium"
+    disk_size_gb = 50      
   }
   deletion_protection = false
 }

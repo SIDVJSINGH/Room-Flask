@@ -13,8 +13,8 @@ resource "google_container_node_pool" "general" {
   }
   node_config {
     preemptible = false
-    machine_type = "e2-small"
-    disk_size_gb = 10
+    machine_type = "e2-medium"
+    disk_size_gb = 20 
     labels = {
       role = "general"
     }
@@ -25,29 +25,3 @@ resource "google_container_node_pool" "general" {
   }
 }
 
-# resource "google_container_node_pool" "spot" {
-#   name = "spot"
-#   location = "us-central1-b"
-#   cluster = google_container_cluster.primary.id
-#   node_count = 1
-#   management {
-#     auto_repair = true
-#     auto_upgrade = true
-#   }
-#   autoscaling {
-#     min_node_count = 1
-#     max_node_count = 4
-#   }
-#   node_config {
-#     preemptible = true
-#     machine_type = "e2-small"
-#     labels = {
-#       role = "spot"
-#       team = "devops"
-#     }
-#     service_account = google_service_account.kubernetes.email
-#     oauth_scopes = [
-#       "https://www.googleapis.com/auth/cloud-platform"
-#     ]
-#   }
-# }
