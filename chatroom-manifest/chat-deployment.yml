@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-gke-deployment
+  namespace: chatroom
+  labels:
+    app: chat-webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chat-webapp
+  template:
+    metadata:
+      labels:
+        app: chat-webapp
+    spec:
+      containers:
+        - name: chatroom
+          image: sidvjsingh/chat:1.0
+          ports:
+            - containerPort: 5000
