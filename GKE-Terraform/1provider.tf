@@ -14,7 +14,7 @@ terraform {
 # to set zone in the gcp, go to shell and type this command "gcloud config set compute/zone us-cental1"
 
 provider "google" {
-  # credentials = file("${path.module}/key/all.json")
+  credentials = file("${path.module}/key/all.json")
   project     = "stp-application"
   region      = "us-central1"
   zone        = "us-central1-a"
