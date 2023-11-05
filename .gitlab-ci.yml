@@ -5,6 +5,10 @@ stages:
   - validate
   - build
   - deploy
+  - destroy
+
+before_script:
+  - cd GKE-Terraform
 
 validate:
   extends: .terraform:validate
