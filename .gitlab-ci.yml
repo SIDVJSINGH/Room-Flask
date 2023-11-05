@@ -1,0 +1,24 @@
+include:
+  - template: Terraform/Base.gitlab-ci.yml
+
+stages:
+  - validate
+  - build
+  - deploy
+
+validate:
+  extends: .terraform:validate
+
+build:
+  extends: .terraform:build
+
+terraform_deploy:
+  stage: deploy
+  script:
+    - gitlab-terraform apply -auto-approve
+
+terraform_destroy:
+  stage: destroy
+  script:
+    - gitlab-terraform destroy -auto-approve
+  when: manual
