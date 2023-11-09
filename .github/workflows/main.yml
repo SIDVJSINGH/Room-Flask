@@ -29,7 +29,7 @@ jobs:
 
       - name: Terraform apply
         working-directory: ./GKE-Terraform
-        run: terraform apply "tfplan.out" --auto-approve
+        run: terraform apply --auto-approve
 
       - name: Sleep for a while after that
         run: sleep 180
