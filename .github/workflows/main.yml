@@ -27,9 +27,9 @@ jobs:
         working-directory: ./GKE-Terraform
         run: terraform plan -out=tfplan.out
 
-      - name: Terraform apply
-        working-directory: ./GKE-Terraform
-        run: terraform apply --auto-approve
+      # - name: Terraform apply
+      #   working-directory: ./GKE-Terraform
+      #   run: terraform apply --auto-approve
 
       - name: Sleep for a while after that
         run: sleep 60
@@ -39,7 +39,6 @@ jobs:
 
       - name: Install Kubectl
         run: |
-          sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
           gcloud components install gke-gcloud-auth-plugin
 
       - name: Run the Manifests
