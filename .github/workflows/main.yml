@@ -1,0 +1,36 @@
+name: Terraform GCP-GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Google Cloud CLIS
+        run: apt-get update && sudo apt-get install google-cloud-cli
+
+      - name: Install Terraform
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && sudo apt-add-
+          apt-get update && sudo apt-get install terraform
+
+      - name: Terraform Init
+        working-directory: ./GKE-Terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./GKE-Terraform
+        run: terraform plan
+
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
+
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve
