@@ -13,20 +13,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Google Cloud CLIS
+      - name: Install Google Cloud CLIs
         run: |
-          agt-get update
-      # apt-get update && apt-get install apt-transport-https ca-certificates gnupg curl
-      # echo "deb [signed-by=/usr/share/keyrings/cloud.google.asc] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          sudo apt-get update
+          sudo apt-get install apt-transport-https ca-certificates gnupg curl
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 
-      # curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | tee /usr/share/keyrings/cloud.google.asc
-
-      # apt-get update && apt-get install google-cloud-cli
-      # gcloud auth activate-service-account --key-file ${{secrets.GCLOUD_CREDENTIALS}}
       - name: Install Terraform
         run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && apt-add-
-          apt-get update && apt-get install terraform
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install terraform
 
       - name: Terraform Init
         working-directory: ./GKE-Terraform
