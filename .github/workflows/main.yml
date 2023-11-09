@@ -13,6 +13,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Remove conflicting package
+        run: |
+          sudo apt-get remove google-cloud-cli -y
+
       - name: Install Google Cloud CLIs
         run: |
           sudo apt-get update
