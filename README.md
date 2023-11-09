@@ -93,3 +93,8 @@ terraform apply
 ```
 terraform apply --auto-approve "tfplan"
 ```
+## Terraform Destroy
+### To destroy all the infrastructure
+```
+terraform destroy --auto-approve
+```
