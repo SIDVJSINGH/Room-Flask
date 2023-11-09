@@ -3,8 +3,8 @@ on:
   push:
     branches: [main]
 jobs:
-  build-push-gcr:
-    name: Build and Push to GCP
+  create-gke:
+    name: GCP-GKE
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: stp-7thsem
