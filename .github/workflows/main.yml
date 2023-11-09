@@ -34,14 +34,11 @@ jobs:
       - name: Sleep for a while after that
         run: sleep 60
 
-      - name: Connect to GKE
-        run: gcloud container clusters get-credentials primary --zone ${{env.ZONE}} --project ${{env.PROJECT_ID}}
-
       - name: Install Kubectl
         run: |
           gcloud components install gke-gcloud-auth-plugin
 
-      - name: Run the Manifests
+      - name: Connect GKE and Run the Manifests
         working-directory: ./chatroom-manifest
         run: |
           bash chat.sh
