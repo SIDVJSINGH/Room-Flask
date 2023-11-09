@@ -11,6 +11,9 @@ resource "google_container_node_pool" "general" {
     auto_repair = true
     auto_upgrade = true
   }
+  lifecycle {
+    prevent_destroy = true
+  }
   node_config {
     preemptible = false
     machine_type = "e2-medium"
