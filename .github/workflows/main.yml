@@ -16,7 +16,7 @@ jobs:
       - name: Install Google Cloud CLIS
         run: |
           curl https://sdk.cloud.google.com | bash
-          apt-get update && sudo apt-get install google-cloud-cli
+          apt-get update && apt-get install google-cloud-cli
           gcloud auth activate-service-account --key-file ${{secrets.GCLOUD_CREDENTIALS}}
 
       - name: Install Terraform
