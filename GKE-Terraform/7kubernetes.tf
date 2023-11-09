@@ -47,7 +47,7 @@ resource "google_container_cluster" "primary" {
     machine_type = "e2-medium"
     disk_size_gb = 50      
   }
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
