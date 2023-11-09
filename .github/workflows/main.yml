@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   create-gke:
-    name: GCP-GKE
+    name: GCP-GKE-Terraform RUN
     runs-on: ubuntu-latest
     needs: []
     env:
