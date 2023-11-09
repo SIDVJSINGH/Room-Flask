@@ -25,10 +25,10 @@ jobs:
           curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
           sudo apt-get update && sudo apt-get install google-cloud-sdk
 
-      - name: Login to Google Cloud
-        run: |
-          echo '${{ secrets.GCLOUD_CREDENTIALS }}' > /tmp/keyfile.json
-          gcloud auth activate-service-account --key-file /tmp/keyfile.json
+      # - name: Login to Google Cloud
+      #   run: |
+      #     echo '${{ secrets.GCLOUD_CREDENTIALS }}' > /tmp/keyfile.json
+      #     gcloud auth activate-service-account --key-file /tmp/keyfile.json
 
       - name: Install Terraform
         run: |
@@ -38,11 +38,15 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./GKE-Terraform
-        run: terraform init
+        run: |
+          echo '${{ secrets.GCLOUD_CREDENTIALS }}' > /tmp/keyfile.json
+          terraform init
 
       - name: Terraform Plan
         working-directory: ./GKE-Terraform
-        run: terraform plan
+        run: |
+          echo '${{ secrets.GCLOUD_CREDENTIALS }}' > /tmp/keyfile.json
+          terraform plan
 
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve
