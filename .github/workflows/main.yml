@@ -33,12 +33,12 @@ jobs:
         run: terraform plan -out=tfplan.out
 
       # Terraform Apply the changes
-      # - name: Terraform apply
-      #   working-directory: ./GKE-Terraform
-      #   run: terraform apply --auto-approve
+      - name: Terraform apply
+        working-directory: ./GKE-Terraform
+        run: terraform apply --auto-approve
 
-      # - name: Sleep for a while after that
-      #   run: sleep 60
+      - name: Sleep for a while after that
+        run: sleep 60
 
   login_gke:
     name: Login to GKE
