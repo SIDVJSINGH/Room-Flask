@@ -15,7 +15,11 @@ jobs:
 
       - name: Install Google Cloud CLIS
         run: |
-          curl https://sdk.cloud.google.com | bash
+          apt-get install apt-transport-https ca-certificates gnupg curl 
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.asc] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | tee /usr/share/keyrings/cloud.google.asc
+
           apt-get update && apt-get install google-cloud-cli
       # gcloud auth activate-service-account --key-file ${{secrets.GCLOUD_CREDENTIALS}}
       - name: Install Terraform
