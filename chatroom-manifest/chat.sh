@@ -1,7 +1,7 @@
 # gcloud config set project stp-7thsem
 
 # Connecting to the cluster
-# gcloud container clusters get-credentials primary --zone us-central1 --project stp-7thsem
+gcloud container clusters get-credentials primary --zone us-central1 --project stp-7thsem
 
 
 # Running the application with all manifests
