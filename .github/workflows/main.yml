@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: stp-7thsem
+      ZONE: us-central1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,3 +26,39 @@ jobs:
       - name: Terraform plan
         working-directory: ./GKE-Terraform
         run: terraform plan -out=tfplan.out
+
+      - name: Terraform apply
+        working-directory: ./GKE-Terraform
+        run: terraform apply "tfplan.out" --auto-approve
+
+      - name: Sleep for a while after that
+        run: sleep 180
+
+      - name: Connect to GKE
+        run: gcloud container clusters get-credentials primary --zone ${{env.ZONE}} --project ${{env.PROJECT_ID}}
+
+      - name: Install kubectl
+        run: |
+          sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list
+          sudo apt-get update
+          sudo apt-get install -y kubectl
+
+      - name: Run the Manifests
+        working-directory: ./chatroom-manifest
+        run: |
+          bash chat.sh
+          sleep 60
+
+      - name: Get the SVC IP
+        run: kubectl get svc -n chatroom
+
+      - name: Manual approval for destroy
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Please approve the manual step for destroying the infrastructure."
+
+      - name: Terraform destroy
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: ./GKE-Terraform
+        run: terraform destroy -auto-approve
