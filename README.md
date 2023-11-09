@@ -95,6 +95,7 @@ terraform apply --auto-approve "tfplan"
 ```
 ## Terraform Destroy
 ### To destroy all the infrastructure
+### Add ```--auto-approve``` flag to avoid typing Yes each time
 ```
 terraform destroy --auto-approve
 ```
