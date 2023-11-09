@@ -2,6 +2,7 @@ name: Terraform GCP-GKE
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 jobs:
   create-gke:
     name: GCP-GKE
@@ -13,44 +14,52 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Setting up GCP with Service Account
       - uses: google-github-actions/setup-gcloud@v0.2.1
         with:
           service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
 
+      # Terraform initializer
       - name: Terraform initialize
         working-directory: ./GKE-Terraform
         run: terraform init
 
+      # Terraform Plan for changes
       - name: Terraform plan
         working-directory: ./GKE-Terraform
         run: terraform plan -out=tfplan.out
 
+      # Terraform Apply the changes
       # - name: Terraform apply
       #   working-directory: ./GKE-Terraform
       #   run: terraform apply --auto-approve
 
-      - name: Sleep for a while after that
-        run: sleep 60
+      # - name: Sleep for a while after that
+      #   run: sleep 60
 
+      # Install Kubectl for running the Application
       - name: Install Kubectl
         run: |
           gcloud components install gke-gcloud-auth-plugin
 
+      # Application manifest to run the chatroom application
       - name: Connect GKE and Run the Manifests
         working-directory: ./chatroom-manifest
         run: |
           bash chat.sh
 
+      # Expose the Service with External IP
       - name: Get the SVC IP
         run: kubectl get svc -n chatroom
 
+      # Destroy the infrastructure
       - name: Manual approval for destroy
         if: github.event_name == 'workflow_dispatch'
         run: echo "Please approve the manual step for destroying the infrastructure."
 
       - name: Terraform destroy
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'manual'
         working-directory: ./GKE-Terraform
         run: terraform destroy -auto-approve

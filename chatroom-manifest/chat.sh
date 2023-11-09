@@ -9,7 +9,7 @@ kubectl apply -f chat-namespace.yml
 kubectl apply -f chat-deployment.yml
 kubectl apply -f chat-service.yml
 
-sleep 180
+# sleep 180
 # To view the service IP
 kubectl get svc -n chatroom
 
