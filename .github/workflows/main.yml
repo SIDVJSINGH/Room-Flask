@@ -52,7 +52,9 @@ jobs:
 
       # Expose the Service with External IP
       - name: Get the SVC IP
-        run: kubectl get svc -n chatroom
+        run: |
+          echo "$(tput setaf 2)Getting the SVC IP...$(tput sgr 0)"
+          kubectl get svc -n chatroom
 
       # Destroy the infrastructure
       - name: Manual approval for destroy
