@@ -97,6 +97,7 @@ jobs:
       - name: Get the SVC IP
         run: kubectl get svc -n chatroom
 
+  # Destroy the Infrastructure
   destroy-gke:
     name: GCP-GKE-Terraform RUN
     runs-on: ubuntu-latest
