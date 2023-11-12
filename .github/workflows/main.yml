@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   create-gke:
-    name: GCP-GKE-Terraform RUN
+    name: GKE Infrastructure Provising
     runs-on: ubuntu-latest
     needs: []
     env:
@@ -13,7 +13,7 @@ jobs:
       ZONE: us-central1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Setting up GCP with Service Account
       - uses: google-github-actions/setup-gcloud@v0.2.1
@@ -49,7 +49,7 @@ jobs:
       ZONE: us-central1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Setting up GCP with Service Account
       - uses: google-github-actions/setup-gcloud@v0.2.1
@@ -78,7 +78,7 @@ jobs:
       ZONE: us-central1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Setting up GCP with Service Account
       - uses: google-github-actions/setup-gcloud@v0.2.1
@@ -108,7 +108,7 @@ jobs:
       ZONE: us-central1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Setting up GCP with Service Account
       - uses: google-github-actions/setup-gcloud@v0.2.1
@@ -123,6 +123,6 @@ jobs:
         run: terraform init
 
       # Terraform Destroy Infrastructure
-      - name: Terraform plan
+      - name: Terraform Destroy
         working-directory: ./GKE-Terraform
         run: terraform destroy --auto-approve
