@@ -1,32 +1,34 @@
 {% extends "layout.html" %} {% block content %}
 
-<form method="POST" class="home">
-  <h2>Welcome to Anonymous</h2>
-  <h2>CHAT ROOMs</h2>
-  <div>
-    <label>Name: </label>
-    <input type="text" name="name" placeholder="name" value="{{name}}" />
+<div class="homescreen">
+  <form method="POST" class="home">
+    <h2>Welcome to Anonymous</h2>
+    <h2>CHAT ROOMs</h2>
+    <div>
+      <label>Name: </label>
+      <input type="text" name="name" placeholder="name" value="{{name}}" />
+      <br />
+    </div>
     <br />
-  </div>
-  <br />
-  <div class="join">
-    <input
-      type="text"
-      placeholder="Enter Room ID"
-      name="join_code"
-      value="{{join_code}}"
-    />
+    <div class="join">
+      <input
+        type="text"
+        placeholder="Enter Room ID"
+        name="join_code"
+        value="{{join_code}}"
+      />
+      <br />
+      <button type="submit" name="join">Join Room</button>
+      <br />
+    </div>
     <br />
-    <button type="submit" name="join">Join Room</button>
-    <br />
-  </div>
-  <br />
-  <button type="submit" name="create" class="create-btn">Create Room</button>
+    <button type="submit" name="create" class="create-btn">Create Room</button>
 
-  {% if error_message %}
-  <ul>
-    <li>{{error_message}}</li>
-  </ul>
-  {% endif %}
-</form>
-{% endblock %}
+    {% if error_message %}
+    <ul>
+      <li>{{error_message}}</li>
+    </ul>
+    {% endif %}
+  </form>
+  {% endblock %}
+</div>

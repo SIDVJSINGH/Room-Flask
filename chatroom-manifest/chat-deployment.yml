@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: chatroom
-          image: sidvjsingh/chatroom:1.0
+          image: sidvjsingh/chatroom:1.1
           ports:
             - containerPort: 5000
