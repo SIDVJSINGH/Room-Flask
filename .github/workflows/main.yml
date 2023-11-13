@@ -22,7 +22,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
-          credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+          # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
       # Terraform initializer
       - name: Terraform initialize
@@ -60,7 +60,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
-          credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+          # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
       # Install Kubectl for running the Application
       - name: Install Kubectl
@@ -91,7 +91,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
           project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
-          credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+          # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
       - name: Install Kubectl
         run: gcloud components install kubectl
@@ -123,7 +123,7 @@ jobs:
   #         service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
   #         project_id: ${{ env.PROJECT_ID }}
   #         export_default_credentials: true
-  #         credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+  ## credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
   #     # Terraform initializer
   #     - name: Terraform initialize
