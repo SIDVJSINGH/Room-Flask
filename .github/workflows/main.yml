@@ -103,34 +103,34 @@ jobs:
       - name: Get the SVC IP
         run: kubectl get svc -n chatroom
 
-  # # Destroy the Infrastructure
-  # destroy-gke:
-  #   name: Destroy Infrastrucure
-  #   runs-on: ubuntu-latest
-  #   needs: [create-gke, login_gke, serviceIP]
-  #   # needs: [login_gke] # Parallel Jobs
-  #   env:
-  #     PROJECT_ID: stp-7thsem
-  #     ZONE: us-central1
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+  # Destroy the Infrastructure
+  destroy-gke:
+    name: Destroy Infrastrucure
+    runs-on: ubuntu-latest
+    needs: [create-gke, login_gke, serviceIP]
+    # needs: [login_gke] # Parallel Jobs
+    env:
+      PROJECT_ID: stp-7thsem
+      ZONE: us-central1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     # Setting up GCP with Service Account
-  #     - uses: google-github-actions/setup-gcloud@v0.2.1
-  #       with:
-  #         version: latest # Version of Gcloud SDK to install.
-  #         service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
-  #         project_id: ${{ env.PROJECT_ID }}
-  #         export_default_credentials: true
-  ## credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+      # Setting up GCP with Service Account
+      - uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          version: latest # Version of Gcloud SDK to install.
+          service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
+          project_id: ${{ env.PROJECT_ID }}
+          export_default_credentials: true
+      # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
-  #     # Terraform initializer
-  #     - name: Terraform initialize
-  #       working-directory: ./GKE-Terraform
-  #       run: terraform init
+      # Terraform initializer
+      - name: Terraform initialize
+        working-directory: ./GKE-Terraform
+        run: terraform init
 
-  #     # Terraform Destroy Infrastructure
-  #     - name: Terraform Destroy
-  #       working-directory: ./GKE-Terraform
-  #       run: terraform destroy --auto-approve
+      # Terraform Destroy Infrastructure
+      - name: Terraform Destroy
+        working-directory: ./GKE-Terraform
+        run: terraform destroy --auto-approve
