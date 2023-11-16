@@ -1,4 +1,4 @@
-name: GKE Update
+name: Update GKE nodes
 
 on:
   push:

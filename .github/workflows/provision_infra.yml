@@ -1,4 +1,4 @@
-name: Terraform GCP-GKE
+name: Provision GKE Infrastructure
 on:
   workflow_dispatch: # makes it manual triggerable
 

@@ -1,4 +1,4 @@
-name: Annual Infrastructure Destroy
+name: Destroy Whole Infrastructure
 
 on:
   workflow_dispatch: # makes it manual triggerable
