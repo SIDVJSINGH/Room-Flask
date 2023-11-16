@@ -2,19 +2,19 @@
 
 ## Commands used to create the Docker image:
 
-### Build the image:
+### `Build the image`:
 
 ```
 docker build -t chatroom .
 ```
 
-### Run the image:
+### `Run the image`:
 
 ```
 docker run -p 5000:5000 chatroom
 ```
 
-### Push to DockerHUB:
+### `Push to DockerHUB`:
 
 ```
 docker tag chatroom:latest <your_dockerhub_username>/chatroom:latest
@@ -44,7 +44,7 @@ docker run -p 5000:5000 sidvjsingh/chatroom:1.0
 
 # Application Manifest to run on Kubernetes Server
 
-## Apply all the manifests:
+## `Apply all the manifests`:
 
 ```
 kubectl apply -f chat-namespace.yml
@@ -52,50 +52,74 @@ kubectl apply -f chat-deployment.yml
 kubectl apply -f chat-service.yml
 ```
 
-## To view the service IP
+## `To view the service IP`
 
 ```
 kubectl get svc -n chat
 ```
 
-## To view the Running Pods
+## `To view the Running Pods`
 
 ```
 kubectl get pods -n chat
 ```
 
-## To view the complete logs of the running Pod
+## `To view the complete logs of the running Pod`
 
 ```
 kubectl logs -f <POD_NAME> -n chat
 ```
 
 # Terraform Commands
-## Terraform INITIALIZE
+
+## `Terraform INITIALIZE`
+
 ```
-terraform init 
+terraform init
 ```
+
 ## To reconfigure the backend
+
 ```
 terraform init -reconfogure
 ```
-## Terraform Plan
-### To save the plan to use in apply command add ```-out=tfplan``` flag at the end
+
+## `Terraform Plan`
+
+```
+terraform plan
+```
+
+### To save the plan to use in apply command add `-out=tfplan` flag at the end
+
 ```
 terraform plan -out=tfplan
 ```
-## Terraform Apply
+
+## `Terraform Apply`
+
 ```
 terraform apply
 ```
-### To avoid writing yes each time add ```--auto-approve``` flag at the end
-### To add planed out add ```"tfplan"``` at the end of the command
+
+### To avoid writing yes each time add `--auto-approve` flag at the end
+
+### To add planed out add `"tfplan"` at the end of the command
+
 ```
 terraform apply --auto-approve "tfplan"
 ```
-## Terraform Destroy
+
+## `Terraform Destroy`
+
+```
+terraform destroy
+```
+
 ### To destroy all the infrastructure
-### Add ```--auto-approve``` flag to avoid typing Yes each time
+
+### Add `--auto-approve` flag to avoid typing Yes each time
+
 ```
 terraform destroy --auto-approve
 ```

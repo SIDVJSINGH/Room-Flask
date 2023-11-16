@@ -1,7 +1,7 @@
 name: Terraform GCP-GKE
 on:
   push:
-    branches: [main]
+    branches: [master] # update this to main to make this work on main branch
   workflow_dispatch:
 jobs:
   create-gke:

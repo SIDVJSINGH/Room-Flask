@@ -9,10 +9,16 @@
       placeholder="Message"
       name="message"
       id="message"
+      onkeypress="checkEnter(event)"
     />
     <button type="button" name="send" id="send-btn" onClick="sendMessage()">
       Send
     </button>
+    <br />
+    <form id="fileForm" enctype="multipart/form-data">
+      <input type="file" id="myFile" name="filename" />
+      <input type="button" value="Upload File" onclick="uploadFile()" />
+    </form>
   </div>
 </div>
 <script type="text/javascript">
@@ -38,15 +44,46 @@
     createMessage(data.name, data.message);
   });
 
+  socketio.on("file", (media) => {
+    createFile(media.name, media.file);
+  });
+  // Added on Enter key press to send message
+  const checkEnter = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // prevent the newline
+      sendMessage();
+    }
+  };
+
   const sendMessage = () => {
     const message = document.getElementById("message");
-    if (message.value == "") return;
+    if (message.value.trim === "") return;
     socketio.emit("message", { data: message.value });
     message.value = "";
+    // Clear the message input value
+    document.getElementById("message").reset();
+    message.focus(); // focus on the message input field
+  };
+  // Added to upload file
+  // Only 1st value of the file is sent to server, so it's not possible to upload multiple files at once
+  const uploadFile = () => {
+    var files = document.getElementById("myFile");
+    var file = files.files[0];
+    if (file == "") return;
+    socketio.emit("file", { media: file });
+    file.value = "";
+    // Clear the file input value
+    document.getElementById("fileForm").reset();
   };
 </script>
 {% for msg in messages %}
 <script type="text/javascript">
-  createMessage("{{msg.name}}", "{{msg.message}}");
+  {% if msg.message %}
+    createMessage("{{msg.name}}", "{{msg.message}}");
+  {% endif %}
+
+  {% if msg.file %}
+    createMessage("{{msg.name}}", "{{msg.file}}");
+  {% endif %}
 </script>
 {% endfor %} {% endblock %}

@@ -1,0 +1,8 @@
+date: 16-11-2023:
+  - Enter to send Message feature added
+  - MongoDB database added to store messages and media files
+  - media files are stored in MongoDB database
+
+
+Next:
+  - Show Media files in chat window
