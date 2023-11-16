@@ -45,68 +45,70 @@ jobs:
 
       - name: Sleep for a while after that
         run: sleep 60
+##------------added in update_infra.yml--------------------------------------------------------
+# login_gke:
+#   name: Login to GKE
+#   runs-on: ubuntu-latest
+#   needs: [create-gke]
+#   env:
+#     PROJECT_ID: stp-7thsem
+#     ZONE: us-central1
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v4
 
-  login_gke:
-    name: Login to GKE
-    runs-on: ubuntu-latest
-    needs: [create-gke]
-    env:
-      PROJECT_ID: stp-7thsem
-      ZONE: us-central1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     # Setting up GCP with Service Account
+#     - uses: google-github-actions/setup-gcloud@v0.2.1
+#       with:
+#         version: latest # Version of Gcloud SDK to install.
+#         service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
+#         project_id: ${{ env.PROJECT_ID }}
+#         export_default_credentials: true
+#         # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
-      # Setting up GCP with Service Account
-      - uses: google-github-actions/setup-gcloud@v0.2.1
-        with:
-          version: latest # Version of Gcloud SDK to install.
-          service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
-          project_id: ${{ env.PROJECT_ID }}
-          export_default_credentials: true
-          # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+#     # Install Kubectl for running the Application
+#     - name: Install Kubectl
+#       run: |
+#         gcloud components install kubectl
 
-      # Install Kubectl for running the Application
-      - name: Install Kubectl
-        run: |
-          gcloud components install kubectl
+#     # Application manifest to run the chatroom application
+#     - name: Connect GKE and Run the Manifests
+#       working-directory: ./chatroom-manifest
+#       run: |
+#         bash chat.sh
 
-      # Application manifest to run the chatroom application
-      - name: Connect GKE and Run the Manifests
-        working-directory: ./chatroom-manifest
-        run: |
-          bash chat.sh
+# serviceIP:
+#   name: External IP
+#   runs-on: ubuntu-latest
+#   needs: [login_gke]
+#   env:
+#     PROJECT_ID: stp-7thsem
+#     ZONE: us-central1
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v4
 
-  serviceIP:
-    name: External IP
-    runs-on: ubuntu-latest
-    needs: [login_gke]
-    env:
-      PROJECT_ID: stp-7thsem
-      ZONE: us-central1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     # Setting up GCP with Service Account
+#     - uses: google-github-actions/setup-gcloud@v0.2.1
+#       with:
+#         version: latest # Version of Gcloud SDK to install.
+#         service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
+#         project_id: ${{ env.PROJECT_ID }}
+#         export_default_credentials: true
+#         # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
 
-      # Setting up GCP with Service Account
-      - uses: google-github-actions/setup-gcloud@v0.2.1
-        with:
-          version: latest # Version of Gcloud SDK to install.
-          service_account_key: ${{ secrets.GCLOUD_CREDENTIALS }}
-          project_id: ${{ env.PROJECT_ID }}
-          export_default_credentials: true
-          # credentials_file_path: ${{ secrets.GCLOUD_CREDENTIALS }} # Credentials will be written to this file
+#     - name: Install Kubectl
+#       run: gcloud components install kubectl
 
-      - name: Install Kubectl
-        run: gcloud components install kubectl
+#     - name: Connect to GKE cluster
+#       run: gcloud container clusters get-credentials primary --zone ${{env.ZONE}} --project ${{env.PROJECT_ID}}
 
-      - name: Connect to GKE cluster
-        run: gcloud container clusters get-credentials primary --zone ${{env.ZONE}} --project ${{env.PROJECT_ID}}
+#     # Expose the Service with External IP
+#     - name: Get the SVC IP
+#       run: kubectl get svc -n chatroom
+##----------------------------------------------------------------------------------------------------------------
 
-      # Expose the Service with External IP
-      - name: Get the SVC IP
-        run: kubectl get svc -n chatroom
-##--------------------Added in destroy.yml file now!!!!-----------------------------------------------------
+##--------------------Added in destroy_infra.yml file now!!!!-----------------------------------------------------
 
 # # Destroy the Infrastructure
 # destroy-gke:

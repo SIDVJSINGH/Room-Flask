@@ -3,6 +3,7 @@ date: 16-11-2023:
   - MongoDB database added to store messages and media files
   - media files are stored in MongoDB database
   - GitHub-actions trigger made manually
+  - Workflow divided into 3 jobs: on push only code will be updated on GKE
 
 
 Next:
