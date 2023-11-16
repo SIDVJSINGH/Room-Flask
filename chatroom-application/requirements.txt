@@ -2,4 +2,3 @@ werkzeug
 flask
 flask_socketio
 cython
-Flask-Uploads

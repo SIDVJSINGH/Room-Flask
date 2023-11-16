@@ -1,8 +1,12 @@
 name: Terraform GCP-GKE
 on:
   workflow_dispatch: # makes it manual triggerable
-  push:
-    branches: [main] # update this to main to make this work on main branch
+
+#-----Uncomment below to run on push to main branch only----------
+# push:
+#   branches: [main]
+#-----------------------------------------------------------------
+
 jobs:
   create-gke:
     name: GKE Infrastructure Provising
