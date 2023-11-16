@@ -1,6 +1,7 @@
 name: Annual Infrastructure Destroy
 
 on:
+  workflow_dispatch: # makes it manual triggerable
   schedule:
     - cron: "*/30 * 13 11 *" # This triggers the workflow every 30 minutes on November 13th
 
