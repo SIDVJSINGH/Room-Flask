@@ -4,7 +4,7 @@ on:
 
 #-----Uncomment below to run on push to main branch only----------
 # push:
-#   branches: [main, master]
+#   branches: [main, master] # runs on both main and master branches, I have only main branch for now
 #-----------------------------------------------------------------
 
 jobs:

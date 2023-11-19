@@ -2,7 +2,7 @@ name: Update GKE nodes
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master] # runs on both main and master branches, I have only main branch for now
 
 jobs:
   login_gke:

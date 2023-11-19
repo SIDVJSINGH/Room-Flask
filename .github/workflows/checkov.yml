@@ -1,8 +1,13 @@
 name: Checkov Checks
 
+# 3 parallel jobs that run in parallel and needs no dependencies.
+# 1. Checkov Terraform
+# 2. Checkov Kubernetes
+# 3. Checkov GitHub-workflow
+
 on:
   push:
-    branches: [main, master]
+    branches: [main, master] # runs on both main and master branches, I have only main branch for now
 
 jobs:
   checkov-Terraform:
