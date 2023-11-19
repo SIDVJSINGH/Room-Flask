@@ -4,7 +4,7 @@ on:
 
 #-----Uncomment below to run on push to main branch only----------
 # push:
-#   branches: [main]
+#   branches: [main, master]
 #-----------------------------------------------------------------
 
 jobs:
