@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: []
     steps:
-      - name: Checkout
+      - name: Checkov Install
         run: |
           sudo apt-get install -y python3-pip
           sudo pip3 install checkov
+      - name: Checkov Test Run
+        working-directory: ./GKE-Terraform
+        run: |
+          checkov -f .
