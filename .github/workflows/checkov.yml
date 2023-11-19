@@ -5,16 +5,21 @@ on:
     branches: [main, master]
 
 jobs:
-  checkov:
-    name: Checkov Checks
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - "ubuntu-latest"
-          - "windows-latest"
-          - "macos-latest"
-    runs-on: "${{ matrix.os }}"
+  checkov-Terraform:
+    name: Checkov Checks on GKE Terraform
+
+    #---------------TO RUN ON MULTIPLE OSs---------------------------------
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     os:
+    #       - "ubuntu-latest"
+    #       - "windows-latest"
+    #       - "macos-latest"
+    # runs-on: "${{ matrix.os }}"
+    #----------------------------------------------------------------------
+
+    runs-on: ubuntu-latest
     needs: []
 
     steps:
@@ -29,5 +34,47 @@ jobs:
 
       - name: Checkov Test Run
         working-directory: ./GKE-Terraform
+        run: |
+          checkov -d .
+
+  checkov-Kubernetes:
+    name: Checkov Checks on K8S manifests
+
+    runs-on: ubuntu-latest
+    needs: []
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkov Install
+        working-directory: ./chatroom-manifest
+        run: |
+          sudo apt-get install -y python3-pip
+          sudo pip3 install checkov
+
+      - name: Checkov Test Run
+        working-directory: ./chatroom-manifest
+        run: |
+          checkov -d .
+
+  checkov-github-workflow:
+    name: Checkov Checks on Github Workflows
+
+    runs-on: ubuntu-latest
+    needs: []
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkov Install
+        working-directory: ./.github/workflows
+        run: |
+          sudo apt-get install -y python3-pip
+          sudo pip3 install checkov
+
+      - name: Checkov Test Run
+        working-directory: ./.github/workflows
         run: |
           checkov -d .
