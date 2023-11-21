@@ -40,7 +40,7 @@ jobs:
       - name: Checkov Test Run
         working-directory: ./GKE-Terraform
         run: |
-          checkov -d . --skip-check CKV_GCP*, CKV2_GCP*
+          checkov -d . --skip-check CKV_GCP*,CKV2_GCP*
 
   checkov-Kubernetes:
     name: Checkov Checks on K8S manifests
@@ -61,7 +61,7 @@ jobs:
       - name: Checkov Test Run
         working-directory: ./chatroom-manifest
         run: |
-          checkov -d . --skip-check CKV_K8S*, CKV2_K8S*
+          checkov -d . --skip-check CKV_K8S*,CKV2_K8S*
 
   checkov-github-workflow:
     name: Checkov Checks on application
@@ -82,4 +82,4 @@ jobs:
       - name: Checkov Test Run
         working-directory: ./chatroom-application
         run: |
-          checkov -d . --skip-check CKV_DOCKER*, CKV2_DOCKER*
+          checkov -d . --skip-check CKV_DOCKER*,CKV2_DOCKER*
