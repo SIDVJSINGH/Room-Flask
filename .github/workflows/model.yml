@@ -1,4 +1,4 @@
-name: Update GKE nodes
+name: Disease Model Deployment
 
 on:
   push:
