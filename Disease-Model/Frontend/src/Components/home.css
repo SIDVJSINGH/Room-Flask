@@ -1,0 +1,31 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.home-container h1 {
+  margin-bottom: 20px;
+}
+
+.home-container input[type="file"],
+.home-container button {
+  margin-bottom: 10px;
+}
+
+.predict-btn{
+  margin-top: 10px;
+}
+
+.prediction-text{
+  font-size: large;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10%;
+  background-color: azure;
+}
+

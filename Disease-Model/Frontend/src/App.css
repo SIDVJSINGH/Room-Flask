@@ -1,0 +1,39 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.content {
+  flex: 1;
+  padding-bottom: 50px; 
+}
+
+button{
+  padding: 5px; 
+  font-size: 16px;
+}
+
+input[type="file"] {
+  padding: 5px; 
+  font-size: 16px;
+  text-align: center; 
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 50px; 
+  background-color: #f0f0f0; 
+  text-align: center;
+
+}

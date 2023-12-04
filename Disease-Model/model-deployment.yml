@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-gke-deployment
+  namespace: backend
+  labels:
+    app: backend-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-webapp
+  template:
+    metadata:
+      labels:
+        app: backend-webapp
+    spec:
+      containers:
+        - name: backend
+          image: sidvjsingh/backend:1
+          ports:
+            - containerPort: 8000

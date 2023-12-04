@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-gke-deployment
+  namespace: backend
+  labels:
+    app: frontend-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-webapp
+  template:
+    metadata:
+      labels:
+        app: frontend-webapp
+    spec:
+      containers:
+        - name: frontend
+          image: sidvjsingh/frontend:1
+          ports:
+            - containerPort: 3000
